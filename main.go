@@ -16,6 +16,8 @@ func main() {
 				fmt.Println("Event: Space")
 			} else if ev.Keychar == 13 {
 				fmt.Println("Event: Return(enter)")
+			} else if ev.Keychar == 27 {
+				fmt.Println("Event: Escape")
 			} else {
 				fmt.Println("Event: ", string(ev.Keychar))
 			}
