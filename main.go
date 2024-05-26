@@ -12,7 +12,13 @@ func main() {
 
 	for ev := range evChan {
 		if ev.Kind == hook.KeyDown {
-			fmt.Println("Event: ", string(ev.Keychar))
+			if ev.Keychar == 32 {
+				fmt.Println("Event: Space")
+			} else if ev.Keychar == 13 {
+				fmt.Println("Event: Return(enter)")
+			} else {
+				fmt.Println("Event: ", string(ev.Keychar))
+			}
 		}
 	}
 }
