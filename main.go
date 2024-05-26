@@ -11,6 +11,8 @@ func main() {
 	defer hook.End()
 
 	for ev := range evChan {
-		fmt.Println("hook: ", ev)
+		if ev.Kind == hook.KeyDown {
+			fmt.Println("Event: ", string(ev.Keychar))
+		}
 	}
 }
