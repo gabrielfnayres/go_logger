@@ -16,7 +16,7 @@ func ClientSideKeylogger() {
 	}
 
 	defer func() {
-		if err := file.Close; err != nil {
+		if err := file.Close(); err != nil {
 			panic(err)
 		}
 	}()
