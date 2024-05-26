@@ -12,7 +12,7 @@ func main() {
 	evchan := hook.Start()
 	defer hook.End()
 	// setting address
-	addr, err := net.ResolveUDPAddr("udp", "127.0.0.1:4444")
+	addr, err := net.ResolveUDPAddr("udp", "127.0.0.1:6940")
 
 	if err != nil {
 		fmt.Println(err)
@@ -25,7 +25,6 @@ func main() {
 
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 	// close connection at the end
 	defer conn.Close()
@@ -45,9 +44,8 @@ func main() {
 			}
 
 			fmt.Printf("Pressing: %s\n", keystroke)
-			data := []byte(keystroke)
 
-			_, err := conn.WriteToUDP(data, addr)
+			conn.Write([]byte(keystroke))
 			if err != nil {
 				fmt.Println(err)
 				return
