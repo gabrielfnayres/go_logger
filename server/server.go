@@ -12,7 +12,7 @@ func main() {
 	evchan := hook.Start()
 	defer hook.End()
 	// setting address
-	addr, err := net.ResolveUDPAddr("udp", "127.0.0.1:6940")
+	addr, err := net.ResolveUDPAddr("udp", "localhost:6940")
 
 	if err != nil {
 		fmt.Println(err)
@@ -21,7 +21,7 @@ func main() {
 
 	// setting connections
 
-	conn, err := net.ListenUDP("udp", addr)
+	conn, err := net.DialUDP("udp", nil, addr)
 
 	if err != nil {
 		fmt.Println(err)

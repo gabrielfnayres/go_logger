@@ -5,14 +5,16 @@ import (
 	"net"
 )
 
+const maxBuffer = 1024
+
 func main() {
 	fmt.Println("Starting client...")
-	saddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:6940")
+	saddr, err := net.ResolveUDPAddr("udp", "localhost:6940")
 	if err != nil {
 		fmt.Println(err)
 
 	}
-	sconn, err := net.DialUDP("udp", nil, saddr)
+	sconn, err := net.ListenUDP("udp", saddr)
 	if err != nil {
 		fmt.Println(err)
 
@@ -20,7 +22,7 @@ func main() {
 
 	defer sconn.Close()
 
-	buffer := make([]byte, 1024)
+	buffer := make([]byte, maxBuffer)
 
 	for {
 		data, _, err := sconn.ReadFromUDP(buffer)
@@ -29,7 +31,7 @@ func main() {
 			return
 		}
 		if data > 0 {
-			fmt.Printf("Key: %s\n", fmt.Sprint(data))
+			fmt.Printf("Key: %s\n", string(buffer[:data]))
 		}
 	}
 }
