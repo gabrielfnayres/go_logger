@@ -1,8 +1,8 @@
 """
 
-# Reverse-logger GO
+# GoLogger
 
-The Reverse Logger is a powerful tool that combines a reverse shell with keylogger functionalities. It allows users to remotely access systems and log all typing activities in real-time, enhancing network security and enabling forensic investigations.
+The GoLogger is a powerful tool that combines a reverse shell with keylogger functionalities. It allows users to remotely access systems and log all typing activities in real-time, enhancing network security and enabling forensic investigations.
 
 ## Features
 
