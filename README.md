@@ -14,7 +14,7 @@ The GoLogger is a powerful tool that combines a reverse shell with keylogger fun
 
 ### Prerequisites
 
-- Go 1.22.1 or later
+- Go 1.22.3
 
 ### Installation
 
@@ -30,6 +30,26 @@ The GoLogger is a powerful tool that combines a reverse shell with keylogger fun
     ```sh
     go mod download
     ```
+
+3. Listen at the reverse shell port with netcat: Open other terminal.
+    ```sh
+    nc -lvnp (port)
+    ```
+
+5. To run reverse shell with the keylogger:
+
+   ```sh
+   go build rev_logger.go
+   ./rev_logger
+   ```
+   
+6. To receive the information:
+
+   ```sh
+   cd client
+   go build client.go
+   ./client
+   ```
 
 ## Contribution Guidelines
 
